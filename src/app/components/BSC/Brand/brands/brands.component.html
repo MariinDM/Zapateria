@@ -1,0 +1,6 @@
+<div class="container">
+    <form class="form form-group" [formGroup]="brandsForm" (ngSubmit)="insert()">
+        <input type="text" placeholder="Brand" class="form-control" formControlName="name">
+        <button class="btn btn-success">Enviar</button>
+    </form>
+</div>

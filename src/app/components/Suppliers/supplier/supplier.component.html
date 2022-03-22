@@ -1,0 +1,122 @@
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Insert Supplier</p>
+  
+                  <form class="mx-1 mx-md-4" [formGroup]="supplierForm" (ngSubmit)="insert()">
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" class="form-control" formControlName="name" />
+                        <label class="form-label" for="form3Example1c">Your Name</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" formControlName="email" />
+                        <label class="form-label" for="form3Example3c">Your Email</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fa fa-phone fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" formControlName="phone" />
+                        <label class="form-label" for="form3Example3c">Your Phone</label>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button type="submit" class="btn btn-primary btn-lg">Insert</button>
+                    </div>
+  
+                  </form>
+  
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                    <table class="table align-middle">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let supp of supplierData">
+                            <td>{{supp.name}}</td>
+                            <td>{{supp.email}}</td>
+                            <td>{{supp.phone}}</td>
+                            <td>
+                              <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm px-3" (click)="getone(supp.supplierid)">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Update Supplier</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form class="mx-1 mx-md-4" [formGroup]="supplierForm" (ngSubmit)="update(supp.supplierid)">
+                                      <div class="modal-body">
+                                          <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                              <input type="text" id="form3Example1c" class="form-control" formControlName="name" [value]="supplier2.name">
+                                              <label class="form-label" for="form3Example1c">Your Name</label>
+                                            </div>
+                                          </div>
+                      
+                                          <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                              <input type="email" id="form3Example3c" class="form-control" formControlName="email" [value]="supplier2.email"/>
+                                              <label class="form-label" for="form3Example3c">Your Email</label>
+                                            </div>
+                                          </div>
+                      
+                                          <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-phone fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                              <input type="email" id="form3Example3c" class="form-control" formControlName="phone" [value]="supplier2.phone"/>
+                                              <label class="form-label" for="form3Example3c">Your Phone</label>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                                <button type="button" (click)="delete(supp.supplierid)" class="btn btn-danger btn-sm px-3">
+                                  <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
