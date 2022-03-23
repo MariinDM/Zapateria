@@ -48,6 +48,7 @@ export class UserComponent implements OnInit {
       console.log(this.userData)
     }
     ,error=>{
+      this.router.navigate(['/login'])
     });
   }
   getone(id:number):void{
