@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductModule } from 'src/app/Models/Product/product/product.module';
@@ -13,27 +13,67 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
   insert(product: ProductModule): Observable<any> {
-    return this.http.post(`${this.serverURL}products`, product);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.post(`${this.serverURL}products`, product,{headers:reqHeader});
   }
   update(id:number, product: ProductModule): Observable<any> {
-    return this.http.put(`${this.serverURL}products/${id}`, product);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.put(`${this.serverURL}products/${id}`, product,{headers:reqHeader});
   }
   delete(id:number): Observable<any> {
-    return this.http.delete(`${this.serverURL}products/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.delete(`${this.serverURL}products/${id}`,{headers:reqHeader});
   }
   getall(): Observable<any> {
-    return this.http.get(`${this.serverURL}products`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}products`,{headers:reqHeader});
   }
   getallcategory(): Observable<any> {
-    return this.http.get(`${this.serverURL}categories`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}categories`,{headers:reqHeader});
   }
   getallsize(): Observable<any> {
-    return this.http.get(`${this.serverURL}sizes`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}sizes`,{headers:reqHeader});
   }
   getallbrand(): Observable<any> {
-    return this.http.get(`${this.serverURL}brands`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}brands`,{headers:reqHeader});
   }
   getone(id:number): Observable<any> {
-    return this.http.get(`${this.serverURL}categories/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}categories/${id}`,{headers:reqHeader});
   }
 }

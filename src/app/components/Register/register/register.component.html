@@ -13,20 +13,17 @@
                 <form [formGroup]="registerFrom" (ngSubmit)="register()">
                   
                   <div class="form-outline form-white mb-4">
-                    <input type="email" id="email" name="email" class="form-control form-control-lg" formControlName="email"
-                    [class.is-invalid]="getEmail"/>
+                    <input type="email" id="email" name="email" class="form-control form-control-lg" formControlName="email"/>
                     <label class="form-label" for="typeEmailX">Email</label>
                   </div>
     
                   <div class="form-outline form-white mb-4">
-                    <input type="password" id="typePasswordX" class="form-control form-control-lg" formControlName="password"
-                    [class.is-invalid]="getPassword"/>
+                    <input type="password" id="typePasswordX" class="form-control form-control-lg" formControlName="password"/>
                     <label class="form-label" for="typePasswordX">Password</label>
                   </div>
 
                   <div class="form-outline form-white mb-4">
-                    <input type="password" id="typePassword2X" class="form-control form-control-lg" 
-                    formControlName="password2" [class.is-invalid]="passwordsValidate"/>
+                    <input type="password" id="typePassword2X" class="form-control form-control-lg" formControlName="password2"/>
                     <label class="form-label" for="typePasswordX">Confirm Password</label>
                   </div>
     

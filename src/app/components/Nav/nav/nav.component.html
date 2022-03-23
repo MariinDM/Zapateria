@@ -29,7 +29,7 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarButtonsExample">
         <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="true">
           <li class="nav-item">
             <a class="nav-link" routerLink="/">HOME</a>
           </li>
@@ -40,21 +40,38 @@
             <a class="nav-link" routerLink="/suppliers">SUPPLIERS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/bsc">BSC</a>
+            <a class="nav-link" routerLink="/brands">BRANDS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/categories">CATEGORIES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sizes">SIZES</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/products">PRODUCTS</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/orders">ORDERS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/users">USERS</a>
+          </li>
         </ul>
         <!-- Left links -->
   
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-end" *ngIf="!stats">
           <a routerLink="/login"  class="btn btn-link px-3 me-2">
             Login
           </a>
           <a type="button" routerLink="/register" class="btn btn-primary me-3">
             Sign up for free
           </a>
+        </div>
+        <div class="d-flex align-items-end" *ngIf="stats">
+          <button type="submit" (click)="logout()" class="btn btn-primary me-3">
+            LogOut
+          </button>
         </div>
       </div>
       <!-- Collapsible wrapper -->

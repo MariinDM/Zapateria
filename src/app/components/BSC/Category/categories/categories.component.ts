@@ -15,6 +15,7 @@ export class CategoriesComponent implements OnInit {
   categoryForm!:FormGroup;
   category!:CategoryModule;
   category2!:CategoryModule;
+  id!:number;
   categoryData!:any[];
 
   constructor(public categoryService:CategoryService, public router:Router, private fb:FormBuilder) { }
@@ -22,6 +23,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
+    this.setCategory2()
   }
 
   insert():void{
@@ -33,7 +35,7 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.insert(this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        this.router.navigate(['/categories']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -49,7 +51,7 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.update(id,this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        this.router.navigate(['/categories']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -75,8 +77,9 @@ export class CategoriesComponent implements OnInit {
   }
   getone(id:number):void{
     this.categoryService.getone(id).subscribe((data:any)=>{
-      this.category2=data.suppliers
+      this.category2=data.categories
       console.log(this.category2)
+      this.id=data.categories.categoryid
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -85,6 +88,11 @@ export class CategoriesComponent implements OnInit {
   setCategory():void{
     this.category = {
       name: this.categoryForm.get('name')?.value,
+    }
+  }
+  setCategory2():void{
+    this.category2 = {
+      name: '',
     }
   }
   createForm():void{

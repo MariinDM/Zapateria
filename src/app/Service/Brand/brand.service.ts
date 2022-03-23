@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BrandModule } from 'src/app/Models/brand/brand/brand.module';
@@ -13,18 +13,43 @@ export class BrandService {
   constructor(private http:HttpClient) { }
 
   insert(brand: BrandModule): Observable<any> {
-    return this.http.post(`${this.serverURL}brands`, brand);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.post(`${this.serverURL}brands`, brand,{headers:reqHeader});
   }
   update(id:number, brand: BrandModule): Observable<any> {
-    return this.http.put(`${this.serverURL}brands/${id}`, brand);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.put(`${this.serverURL}brands/${id}`, brand,{headers:reqHeader});
   }
   delete(id:number): Observable<any> {
-    return this.http.delete(`${this.serverURL}brands/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.delete(`${this.serverURL}brands/${id}`,{headers:reqHeader});
   }
   getall(): Observable<any> {
-    return this.http.get(`${this.serverURL}brands`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}brands`,{headers:reqHeader});
   }
   getone(id:number): Observable<any> {
-    return this.http.get(`${this.serverURL}brands/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}brands/${id}`,{headers:reqHeader});
   }
 }

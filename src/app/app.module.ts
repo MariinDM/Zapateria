@@ -19,6 +19,9 @@ import { BrandsComponent } from './components/BSC/Brand/brands/brands.component'
 import { MenuComponent } from './components/BSC/Menu/menu/menu.component';
 import { CategoriesComponent } from './components/BSC/Category/categories/categories.component';
 import { ProductComponent } from './components/Products/product/product.component';
+import { AuthModule }  from  '@auth0/auth0-angular';
+import { UserComponent } from './components/Table/users/user/user.component';
+import { OrderComponent } from './components/Orders/order/order.component' ;
 
 @NgModule({
   declarations: [
@@ -34,13 +37,19 @@ import { ProductComponent } from './components/Products/product/product.componen
     BrandsComponent,
     CategoriesComponent,
     MenuComponent,
-    ProductComponent
+    ProductComponent,
+    UserComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule.forRoot ( { 
+      domain: 'YOUR_AUTH0_DOMAIN' , 
+      clientId : 'YOUR_AUTH0_CLIENT_ID' , 
+    }),
   ],
   providers: [CookieService,],
   bootstrap: [AppComponent]

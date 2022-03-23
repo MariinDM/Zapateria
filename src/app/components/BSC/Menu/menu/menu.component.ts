@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { checkLocalStorage } from 'src/app/functions/token';
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +14,7 @@ export class MenuComponent implements OnInit {
   categoryForm!:FormGroup;
   sizeForm!:FormGroup;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModule } from 'src/app/Models/user/user.module';
+import { UserModule, UserResponse } from 'src/app/Models/user/user.module';
 import { UserService } from '../../../Service/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
+import { checkLocalStorage } from 'src/app/functions/token';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
   user!:UserModule;
 
-  constructor(public UserService: UserService,public router:Router,private fb:FormBuilder) {
+  constructor(public UserService: UserService,public router:Router,private fb:FormBuilder, private cookie:CookieService) {
     this.createFrom();
   }
 
@@ -29,8 +31,10 @@ export class LoginComponent implements OnInit {
     }else{
       this.setUser();
       this.UserService.login(this.user).subscribe((data:any)=>{
-        timeMessage('Inicio de Sesion',1500)
-        this.router.navigate(['/']);
+        if(data){
+          this.router.navigate(['/'])
+          window.location.reload()
+        }
       },error=>{
         errorMessage('Email o Contraseña Incorrecta')
       });

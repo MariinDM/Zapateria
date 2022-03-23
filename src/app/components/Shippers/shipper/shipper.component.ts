@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
+import { checkLocalStorage } from 'src/app/functions/token';
 import { ShipperModule } from 'src/app/Models/shipper/shipper.module';
 import { ShipperService } from 'src/app/Service/Shippers/shipper.service';
 
@@ -56,7 +57,7 @@ export class ShipperComponent implements OnInit {
   }
   delete(id:number):void{
     this.shipperService.delete(id).subscribe((data:any)=>{
-      timeMessage('Registrado',1500)
+      timeMessage('Borrado',1500)
       this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
@@ -68,7 +69,7 @@ export class ShipperComponent implements OnInit {
       console.log(this.shipperData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
+      
     });
   }
   getone(id:number):void{

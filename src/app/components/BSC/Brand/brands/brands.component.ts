@@ -15,6 +15,7 @@ export class BrandsComponent implements OnInit {
   brandsForm!:FormGroup;
   brand!:BrandModule;
   brand2!:BrandModule;
+  id!:number;
   brandsData!:any[];
 
   constructor(public brandService:BrandService, public router:Router, private fb:FormBuilder) { }
@@ -22,6 +23,7 @@ export class BrandsComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
+    this.setBrand2()
   }
   insert():void{
     if(this.brandsForm.invalid){
@@ -32,7 +34,7 @@ export class BrandsComponent implements OnInit {
       this.setBrand();
       this.brandService.insert(this.brand).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        this.router.navigate(['/brands']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -47,8 +49,8 @@ export class BrandsComponent implements OnInit {
     }else{
       this.setBrand();
       this.brandService.update(id,this.brand).subscribe((data:any)=>{
-        timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        timeMessage('Actualizado',1500)
+        this.router.navigate(['/brands']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -57,7 +59,7 @@ export class BrandsComponent implements OnInit {
   }
   delete(id:number):void{
     this.brandService.delete(id).subscribe((data:any)=>{
-      timeMessage('Registrado',1500)
+      timeMessage('Borrado',1500)
       this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
@@ -69,13 +71,14 @@ export class BrandsComponent implements OnInit {
       console.log(this.brandsData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
     });
   }
   getone(id:number):void{
     this.brandService.getone(id).subscribe((data:any)=>{
-      this.brand2=data.suppliers
+      this.brand2=data.brands
       console.log(this.brand2)
+      this.id=data.brands.brandid
+      console.log('id: '+this.id)
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -84,6 +87,11 @@ export class BrandsComponent implements OnInit {
   setBrand():void{
     this.brand = {
       name: this.brandsForm.get('name')?.value,
+    }
+  }
+  setBrand2():void{
+    this.brand2 = {
+      name: ''
     }
   }
   createForm():void{

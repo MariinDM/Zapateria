@@ -1,35 +1,69 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { UserModule } from '../Models/user/user.module';
 import { environment } from 'src/environments/environment.prod';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 
+//const helper = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   serverURL=environment.apiURL
-  constructor(private http:HttpClient,private cookies:CookieService) { }
+
+  private loggedIn= new BehaviorSubject<boolean>(false);
+
+  get isLogged():Observable<boolean>{
+    return this.loggedIn.asObservable()
+  }
+
+  constructor(private http:HttpClient,private cookie:CookieService) { 
+    // this.checkToken()
+  }
 
   login(user:UserModule):Observable<any>{
-    return this.http.post(`${this.serverURL}api/v1/users/login`, user);
+    return this.http.post(`${this.serverURL}api/v1/users/login`, user)
+    .pipe(
+      map((res:any)=>{
+        this.saveToken(res.token)
+        this.loggedIn.next(true)
+        console.log(res)
+        return res
+      }),
+      catchError((err)=>this.handlerError(err))
+    );
+  }
+  // private checkToken():void{
+  //   const userToken:any = localStorage.getItem('token')
+  //   const isExpired = helper.isTokenExpired(userToken)
+  //   console.log(isExpired)
+    
+  //   isExpired ? this.logout() : this.loggedIn.next(true)
+  // }
+
+  private saveToken(token:string):void{
+    localStorage.setItem("token",token)
+    this.cookie.set('token',token)
+  }
+
+  private handlerError(err:any):Observable<never>{
+    let errorMessage = `Ocurrio un Error`;
+    if(err){
+      errorMessage=`Error: code ${err.mesagge}`;
+    }
+    window.alert(errorMessage)
+    return throwError(errorMessage)
+  }
+
+  logout():void{
+    localStorage.removeItem('token')
+    this.cookie.delete('token')
+    this.loggedIn.next(false)
   }
   register(user: UserModule): Observable<any> {
     return this.http.post(`${this.serverURL}api/v1/users/register`, user);
-  }
-  setToken(token: string) {
-    this.cookies.set("token",token);
-  }
-  getToken() {
-    return this.cookies.get("token");
-  }
-  getUser() {
-    return this.http.get("https://reqres.in/api/users/2");
-  }
-  getUserLogged() {
-    const token = this.getToken();
-    // Aquí iría el endpoint para devolver el usuario para un token
   }
 }

@@ -51,7 +51,7 @@ export function timeMessage(text: string, time: any) {
         toast: true,
         position: 'center',
         showConfirmButton: false,
-        timer: 3000,
+        timer: time,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -61,6 +61,6 @@ export function timeMessage(text: string, time: any) {
       
       Toast.fire({
         icon: 'success',
-        title: 'Signed in successfully'
+        title: text
       })
 }

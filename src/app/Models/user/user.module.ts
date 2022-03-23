@@ -16,4 +16,8 @@ export class UserModule {
   email:string='';
   password:string='';
 
- }
+}
+
+export class UserResponse{
+  accessid!:number;
+}

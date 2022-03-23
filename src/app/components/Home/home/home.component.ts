@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { checkLocalStorage } from 'src/app/functions/token';
 
 @Component({
   selector: 'app-home',

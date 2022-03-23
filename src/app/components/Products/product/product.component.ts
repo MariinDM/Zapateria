@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
+import { checkLocalStorage } from 'src/app/functions/token';
 import { ProductModule } from 'src/app/Models/Product/product/product.module';
 import { BrandService } from 'src/app/Service/Brand/brand.service';
 import { CategoryService } from 'src/app/Service/category/category.service';
@@ -78,7 +79,7 @@ export class ProductComponent implements OnInit {
       console.log(this.productData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
+      
     });
   }
   getallsize():void{
@@ -87,7 +88,7 @@ export class ProductComponent implements OnInit {
       console.log(this.productData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
+      
     });
   }
   getallcategory():void{
@@ -96,7 +97,7 @@ export class ProductComponent implements OnInit {
       console.log(this.categoryData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
+      
     });
   }
   getallbrand():void{
@@ -105,7 +106,7 @@ export class ProductComponent implements OnInit {
       console.log(this.brandData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
+      
     });
   }
   getone(id:number):void{

@@ -15,6 +15,7 @@ export class SizesComponent implements OnInit {
   sizeForm!:FormGroup;
   size!:SizeModule;
   size2!:SizeModule;
+  id!:number;
   sizeData!:any[];
 
   constructor(public sizeService:SizeService, public router:Router, private fb:FormBuilder) { }
@@ -22,6 +23,7 @@ export class SizesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
+    this.setSize2()
   }
   insert():void{
     if(this.sizeForm.invalid){
@@ -32,7 +34,7 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.insert(this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        this.router.navigate(['/sizes']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -48,7 +50,7 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.update(id,this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/bsc']);
+        this.router.navigate(['/sizes']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -76,6 +78,7 @@ export class SizesComponent implements OnInit {
     this.sizeService.getone(id).subscribe((data:any)=>{
       this.size2=data.sizes
       console.log(this.size2)
+      this.id=data.sizes.sizeid
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -84,6 +87,11 @@ export class SizesComponent implements OnInit {
   setSize():void{
     this.size = {
       size: this.sizeForm.get('size')?.value,
+    }
+  }
+  setSize2():void{
+    this.size2 = {
+      size: 0
     }
   }
   createForm():void{

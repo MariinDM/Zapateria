@@ -4,6 +4,7 @@ import { UserModule } from 'src/app/Models/user/user.module';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
+import { checkLocalStorage } from 'src/app/functions/token';
 
 @Component({
   selector: 'app-register',

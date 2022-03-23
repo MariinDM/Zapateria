@@ -1,0 +1,49 @@
+<div class="container">
+<div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+    <table class="table align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Access</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let us of userData">
+            <td>{{us.email}}</td>
+            <td>{{us.accessid}}</td>
+            <td>
+              <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm px-3" (click)="getone(us.id)">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Update Permmitions</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="mx-1 mx-md-4" [formGroup]="userForm" (ngSubmit)="update(id)">
+                      <div class="modal-body">
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input type="text" id="form3Example1c" class="form-control" formControlName="accessid" [value]="user.accessid">
+                              <label class="form-label" for="form3Example1c">Your Permmitions (1/2)</label>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryModule } from 'src/app/Models/category/category/category.module';
@@ -13,19 +13,44 @@ export class CategoryService {
   constructor(private http:HttpClient) { }
 
   insert(category: CategoryModule): Observable<any> {
-    return this.http.post(`${this.serverURL}categories`, category);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.post(`${this.serverURL}categories`, category,{headers:reqHeader});
   }
   update(id:number, category: CategoryModule): Observable<any> {
-    return this.http.put(`${this.serverURL}categories/${id}`, category);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.put(`${this.serverURL}categories/${id}`, category,{headers:reqHeader});
   }
   delete(id:number): Observable<any> {
-    return this.http.delete(`${this.serverURL}categories/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.delete(`${this.serverURL}categories/${id}`,{headers:reqHeader});
   }
   getall(): Observable<any> {
-    return this.http.get(`${this.serverURL}categories`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}categories`,{headers:reqHeader});
   }
   getone(id:number): Observable<any> {
-    return this.http.get(`${this.serverURL}categories/${id}`);
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.get(`${this.serverURL}categories/${id}`,{headers:reqHeader});
   }
 
 }

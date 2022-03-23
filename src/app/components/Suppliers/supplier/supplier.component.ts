@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
+import { checkLocalStorage } from 'src/app/functions/token';
 import { SupplierModule } from 'src/app/Models/supplier/supplier.module';
 import { SupplierService } from 'src/app/Service/Suppliers/supplier.service';
 
@@ -14,6 +15,7 @@ export class SupplierComponent implements OnInit {
   supplierForm!:FormGroup;
   supplier!:SupplierModule;
   supplier2!:SupplierModule;
+  id!:number;
   supplierData!:any[];
   constructor(public supplierService:SupplierService, public router:Router, private fb:FormBuilder) { }
 
@@ -57,7 +59,7 @@ export class SupplierComponent implements OnInit {
   }
   delete(id:number):void{
     this.supplierService.delete(id).subscribe((data:any)=>{
-      timeMessage('Registrado',1500)
+      timeMessage('Borrado',1500)
       this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
@@ -69,13 +71,14 @@ export class SupplierComponent implements OnInit {
       console.log(this.supplierData)
     }
     ,error=>{
-      errorMessage('Ocurrio un problema')
     });
   }
   getone(id:number):void{
     this.supplierService.getone(id).subscribe((data:any)=>{
       this.supplier2=data.suppliers
       console.log(this.supplier2)
+      this.id=data.suppliers.supplierid
+      console.log('id: '+this.id)
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -94,13 +97,6 @@ export class SupplierComponent implements OnInit {
       email: '',
       phone: '',
     }
-  }
-
-  get getEmail(){
-    return this.supplierForm.get('name') && this.supplierForm.get('name')?.touched
-  }
-  get getPassword(){
-    return this.supplierForm.get('phone') && this.supplierForm.get('phone')?.touched
   }
 
   createForm():void{
