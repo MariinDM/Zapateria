@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { checkLocalStorage } from 'src/app/functions/token';
+import { BrandModule } from 'src/app/Models/brand/brand/brand.module';
+import { CategoryModule } from 'src/app/Models/category/category/category.module';
 import { ProductModule } from 'src/app/Models/Product/product/product.module';
+import { SizeModule } from 'src/app/Models/size/size/size.module';
 import { BrandService } from 'src/app/Service/Brand/brand.service';
 import { CategoryService } from 'src/app/Service/category/category.service';
 import { ProductService } from 'src/app/Service/Product/product.service';
@@ -17,7 +20,13 @@ import { SizeService } from 'src/app/Service/Size/size.service';
 export class ProductComponent implements OnInit {
 
   productForm!:FormGroup;
+  idbrand!:number;
+  idsize!:number;
+  idcategory!:number;
   product!:ProductModule;
+  brand!:BrandModule;
+  size!:SizeModule;
+  category!:CategoryModule;
   product2!:ProductModule;
   productData!:any[];
   sizeData!:any[];
@@ -75,7 +84,7 @@ export class ProductComponent implements OnInit {
   }
   getall():void{
     this.productService.getall().subscribe((data:any)=>{
-      this.productData=data.suppliers
+      this.productData=data.products
       console.log(this.productData)
     }
     ,error=>{
@@ -85,7 +94,7 @@ export class ProductComponent implements OnInit {
   getallsize():void{
     this.sizeService.getall().subscribe((data:any)=>{
       this.sizeData=data.sizes
-      console.log(this.productData)
+      console.log(this.sizeData)
     }
     ,error=>{
       
@@ -118,15 +127,42 @@ export class ProductComponent implements OnInit {
       errorMessage('Ocurrio un problema')
     });
   }
+  getoneBrand(id:number):void{
+    this.brandService.getone(id).subscribe((data:any)=>{
+      this.brand=data.brands
+      console.log(this.brand)
+    }
+    ,error=>{
+      errorMessage('Ocurrio un problema')
+    });
+  }
+  getoneSize(id:number):void{
+    this.sizeService.getone(id).subscribe((data:any)=>{
+      this.size=data.sizes
+      console.log(this.size)
+    }
+    ,error=>{
+      errorMessage('Ocurrio un problema')
+    });
+  }
+  getoneCategory(id:number):void{
+    this.categoryService.getone(id).subscribe((data:any)=>{
+      this.category=data.categories
+      console.log(this.category)
+    }
+    ,error=>{
+      errorMessage('Ocurrio un problema')
+    });
+  }
   setProduct():void{
     this.product = {
       name: this.productForm.get('name')?.value,
       color: this.productForm.get('color')?.value,
       stock: this.productForm.get('stock')?.value,
       price: this.productForm.get('price')?.value,
-      sizeid: this.productForm.get('sizeid')?.value,
-      brandid: this.productForm.get('brandid')?.value,
-      categoryid: this.productForm.get('categoryid')?.value,
+      sizeid: this.idsize = this.productForm.get('sizeid')?.value,
+      brandid: this.idbrand = this.productForm.get('brandid')?.value,
+      categoryid: this.idcategory = this.productForm.get('categoryid')?.value,
     }
   }
 
@@ -141,5 +177,4 @@ export class ProductComponent implements OnInit {
       categoryid:[0,[Validators.required]],
     });
   }
-
 }

@@ -7,58 +7,58 @@
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
   
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Insert Shipper</p>
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Insert Orders</p>
   
-                  <form class="mx-1 mx-md-4" [formGroup]="orderForm" (ngSubmit)="insert()">
-  
-                    <div class="d-flex flex-row align-items-center mb-8">
-                        <div class="col-md-4">
-                            <div class="form-outline">
-                                <label class="form-label" for="form3Example1q">Cate:    </label>
-                                <select class="select" formControlName="supplierid">
-                                    <option disabled>SUPPLIERS</option>
-                                    <option *ngFor="let sup of supplierData" [value]="sup.supplierid" ngDefaultControl>{{sup.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-outline">
-                                <label class="form-label" for="form3Example1q">Cate:    </label>
-                                <select class="select" formControlName="supplierid">
-                                    <option disabled>SHIPPERS</option>
-                                    <option *ngFor="let ship of shipperData" [value]="ship.shipperid" ngDefaultControl>{{ship.name}}</option>
-                                </select>
-                            </div>
-                        </div>
+                  <form class="form form-group" [formGroup]="orderForm" (ngSubmit)="insert()">
+                    
+                    <div class="d-flex flex-row align-items-center">  
+                        <label class="form-label" for="form3Example1q">Supplier:    </label>
+                        <select class="form-select" formControlName="supplierid">
+                            <option disabled selected>SUPPLIERS</option>
+                            <option *ngFor="let sup of supplierData" [value]="sup.supplierid" ngDefaultControl>{{sup.name}}</option>
+                        </select>
+                        <label class="form-label" for="form3Example1q">Shipper:    </label>
+                          <select class="form-select" formControlName="shipperid">
+                              <option disabled selected>SHIPPERS</option>
+                              <option *ngFor="let ship of shipperData" [value]="ship.shipperid" ngDefaultControl>{{ship.name}}</option>
+                          </select>
                     </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa fa-phone fa-lg me-3 fa-fw"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" formControlName="phone" />
-                        <label class="form-label" for="form3Example3c">Your Phone</label>
-                      </div>
-                    </div>
-  
+                    <br>
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg">Insert</button>
                     </div>
-  
                   </form>
-  
-                </div>
-                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                  <form class="form form-group" [formGroup]="orderdetailsForm" (ngSubmit)="insert()">
+                      <div class="form-outline">
+                        <label class="form-label" for="form3Example1q">Products:    </label>
+                          <select class="select form-select" formControlName="productid">
+                              <option disabled selected>PRODUCTS</option>
+                              <option *ngFor="let pro of productsData" [value]="pro.productid" ngDefaultControl>{{pro.name}}</option>
+                          </select>
+                          <br>
+                          <label class="form-label" for="form3Example1q">Quantity:    </label>
+                          <input type="text" class="form-control" placeholder="UNIT PRICE" formControlName="quantity">
+                          <br>
+                          <label class="form-label" for="form3Example1q">Price:    </label>
+                          <input type="text" class="form-control" placeholder="UNIT PRICE" formControlName="unitprice">
+                          <br>
+                          <!-- <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button type="submit" class="btn btn-primary btn-lg" (click)="addArray(id)">Add</button>
+                          </div> -->
+                      </div>
+                  </form>
+                <!-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                     <table class="table align-middle">
                         <thead>
                           <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Update</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Price</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <!-- <tr *ngFor="let ship of shipperData">
+                          <tr *ngFor="let ship of shipperData">
                             <td>{{ship.name}}</td>
                             <td>{{ship.phone}}</td>
                             <td>
@@ -105,13 +105,14 @@
                               </button>
                             </td>
                           </tr>
-                        </tbody> -->
+                        </tbody>
                       </table>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>

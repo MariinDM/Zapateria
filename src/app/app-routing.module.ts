@@ -26,8 +26,7 @@ const routes: Routes = [
   {path:"suppliers",component:SupplierComponent,canActivate:[AuthGuard]},
   {path:"bsc",component:MenuComponent,canActivate:[AuthGuard]},
   {path:"products",component:ProductComponent,canActivate:[AuthGuard]},
-  {path:"orders",component:OrderComponent,canActivate:[AuthGuard]},
-  {path:"users",component:UserComponent,canActivate:[AuthGuard]},
+  {path:"orders",component:OrderComponent,canActivate:[]},
   {path:"**",redirectTo:'/'}
 ];
 

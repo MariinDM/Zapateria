@@ -1,9 +1,8 @@
-<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+<section class="h-100 h-custom" style="background-color: #eee;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-8 col-xl-6">
                 <div class="card rounded-3">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">PRODCUTS INFORMATION</h3>
                         <form class="px-md-2" [formGroup]="productForm" (ngSubmit)="insert()">
@@ -23,7 +22,7 @@
                                 <div class="col-md-4">
                                     <div class="form-outline">
                                         <label class="form-label" for="form3Example1q">Brand:   </label>
-                                        <select class="select" formControlName="brandid">
+                                        <select class="form-select" formControlName="brandid">
                                             <option value="1" disabled>Class</option>
                                             <option *ngFor="let bra of brandData" [value]="bra.brandid" ngDefaultControl>{{bra.name}}</option>
                                         </select>
@@ -32,7 +31,7 @@
                                 <div class="col-md-4">
                                     <div class="form-outline">
                                         <label class="form-label" for="form3Example1q">Size:   </label>
-                                        <select class="select" formControlName="sizeid">
+                                        <select class="form-select" formControlName="sizeid">
                                             <option value="1" disabled>Class</option>
                                             <option *ngFor="let sz of sizeData" [value]="sz.sizeid" ngDefaultControl>{{sz.size}}</option>
                                         </select>
@@ -41,13 +40,14 @@
                                 <div class="col-md-4">
                                     <div class="form-outline">
                                         <label class="form-label" for="form3Example1q">Cate:    </label>
-                                        <select class="select" formControlName="categoryid">
+                                        <select class="form-select" formControlName="categoryid">
                                             <option disabled>Category</option>
                                             <option *ngFor="let cat of categoryData" [value]="cat.categoryid" ngDefaultControl>{{cat.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
                                 <div class="col-md-6">
                                     <div class="form-outline">
@@ -70,3 +70,30 @@
         </div>
     </div>
 </section>
+<br><br>
+<div class="container">
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Brand</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pro of productData">
+            <td>{{pro.name}}</td>
+            <td>{{pro.color}}</td>
+            <td>{{pro.stock}}</td>
+            <td>{{pro.price}}</td>
+            <td>{{pro.sizeid}}</td>
+            <td>{{pro.brandid}}</td>
+            <td>{{pro.categoryid}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div><br><br><br><br>

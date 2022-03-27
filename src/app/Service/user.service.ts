@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { UserModule } from '../Models/user/user.module';
 import { environment } from 'src/environments/environment.prod';
@@ -59,7 +59,13 @@ export class UserService {
   }
 
   logout():void{
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
     localStorage.removeItem('token')
+    this.http.post(`${this.serverURL}api/v1/users/logout`,token)
     this.cookie.delete('token')
     this.loggedIn.next(false)
   }

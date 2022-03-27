@@ -19,7 +19,7 @@ export class OrderdetailService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.post(`${this.serverURL}ordersdetails`, orderdetail,{headers:reqHeader});
+    return this.http.post(`${this.serverURL}orderdetails`, orderdetail,{headers:reqHeader});
   }
   update(id:number,orderdetail: OrderdetailModule): Observable<any> {
     const token:any = localStorage.getItem('token')

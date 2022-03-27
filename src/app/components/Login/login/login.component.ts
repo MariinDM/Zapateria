@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
       this.setUser();
       this.UserService.login(this.user).subscribe((data:any)=>{
         if(data){
-          this.router.navigate(['/'])
           window.location.reload()
+          this.router.navigate(['/'])
         }
       },error=>{
         errorMessage('Email o Contraseña Incorrecta')
