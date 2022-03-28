@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { PruebaRoutingModule } from './prueba-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    PruebaRoutingModule
   ]
 })
-export class SupplierModule { 
-  constructor(){}
-
-  supplier!:string;
-  email!:string;
-  phone!:string;
-}
+export class PruebaModule { }

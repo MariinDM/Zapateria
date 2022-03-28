@@ -7,3 +7,10 @@ export function checkLocalStorage(){
         return status=false;
     }
 }
+export function checkAccessID(){
+    let accessid:any;
+    if(localStorage.getItem('access')){
+        accessid=localStorage.getItem('access')
+        return accessid
+    }
+}

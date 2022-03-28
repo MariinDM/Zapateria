@@ -14,7 +14,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fa fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" formControlName="name" />
+                        <input type="text" id="form3Example1c" class="form-control" formControlName="shipper" />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -46,7 +46,7 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let ship of shipperData">
-                            <td>{{ship.name}}</td>
+                            <td>{{ship.shipper}}</td>
                             <td>{{ship.phone}}</td>
                             <td>
                               <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm px-3" (click)="getone(ship.shipperid)">
@@ -64,7 +64,7 @@
                                           <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fa fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                              <input type="text" id="form3Example1c" class="form-control" formControlName="name" [value]="shipper2.name">
+                                              <input type="text" id="form3Example1c" class="form-control" formControlName="shipper" [value]="shipper2.shipper">
                                               <label class="form-label" for="form3Example1c">Your Name</label>
                                             </div>
                                           </div>

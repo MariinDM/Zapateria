@@ -25,10 +25,10 @@ export class UserService {
   }
 
   login(user:UserModule):Observable<any>{
-    return this.http.post(`${this.serverURL}api/v1/users/login`, user)
+    return this.http.post(`${this.serverURL}users/login`, user)
     .pipe(
       map((res:any)=>{
-        this.saveToken(res.token)
+        this.saveToken(res.token.token,res.userLevel)
         this.loggedIn.next(true)
         console.log(res)
         return res
@@ -44,9 +44,11 @@ export class UserService {
   //   isExpired ? this.logout() : this.loggedIn.next(true)
   // }
 
-  private saveToken(token:string):void{
+  private saveToken(token:string,access:string):void{
     localStorage.setItem("token",token)
     this.cookie.set('token',token)
+    localStorage.setItem("access",access)
+    this.cookie.set('access',access)
   }
 
   private handlerError(err:any):Observable<never>{
@@ -65,11 +67,12 @@ export class UserService {
       'Authorization': `Bearer ${token}`
    });
     localStorage.removeItem('token')
-    this.http.post(`${this.serverURL}api/v1/users/logout`,token)
+    localStorage.removeItem('access')
+    this.http.post(`${this.serverURL}users/logout`,token)
     this.cookie.delete('token')
     this.loggedIn.next(false)
   }
   register(user: UserModule): Observable<any> {
-    return this.http.post(`${this.serverURL}api/v1/users/register`, user);
+    return this.http.post(`${this.serverURL}users/register`, user);
   }
 }

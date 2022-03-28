@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { SizeModule } from 'src/app/Models/size/size/size.module';
 import { SizeService } from 'src/app/Service/Size/size.service';
+import { timer, interval} from 'rxjs';
 
 @Component({
   selector: 'app-sizes',
@@ -23,6 +24,9 @@ export class SizesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
+    interval(3000).subscribe(()=>{
+      this.getall()
+    })
     this.setSize2()
   }
   insert():void{
@@ -34,8 +38,6 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.insert(this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/sizes']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -50,8 +52,6 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.update(id,this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/sizes']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -60,14 +60,13 @@ export class SizesComponent implements OnInit {
   delete(id:number):void{
     this.sizeService.delete(id).subscribe((data:any)=>{
       timeMessage('Registrado',1500)
-      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });
   }
   getall():void{
     this.sizeService.getall().subscribe((data:any)=>{
-      this.sizeData=data.sizes
+      this.sizeData=data.dato
       console.log(this.sizeData)
     }
     ,error=>{
@@ -76,9 +75,9 @@ export class SizesComponent implements OnInit {
   }
   getone(id:number):void{
     this.sizeService.getone(id).subscribe((data:any)=>{
-      this.size2=data.sizes
+      this.size2=data.dato
       console.log(this.size2)
-      this.id=data.sizes.sizeid
+      this.id=data.dato.sizeid
     }
     ,error=>{
       errorMessage('Ocurrio un problema')

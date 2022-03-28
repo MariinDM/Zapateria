@@ -4,12 +4,12 @@
             <div class="col-lg-8 col-xl-6">
                 <div class="card rounded-3">
                     <div class="card-body p-4 p-md-5">
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">PRODCUTS INFORMATION</h3>
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">PRODUCTS INFORMATION</h3>
                         <form class="px-md-2" [formGroup]="productForm" (ngSubmit)="insert()">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-outline">
-                                        <input type="text" id="form3Example1q" class="form-control" formControlName="name" placeholder="NAME"/>
+                                        <input type="text" id="form3Example1q" class="form-control" formControlName="product" placeholder="NAME"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -24,7 +24,7 @@
                                         <label class="form-label" for="form3Example1q">Brand:   </label>
                                         <select class="form-select" formControlName="brandid">
                                             <option value="1" disabled>Class</option>
-                                            <option *ngFor="let bra of brandData" [value]="bra.brandid" ngDefaultControl>{{bra.name}}</option>
+                                            <option *ngFor="let bra of brandData" [value]="bra.brandid" ngDefaultControl>{{bra.brand}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                         <label class="form-label" for="form3Example1q">Cate:    </label>
                                         <select class="form-select" formControlName="categoryid">
                                             <option disabled>Category</option>
-                                            <option *ngFor="let cat of categoryData" [value]="cat.categoryid" ngDefaultControl>{{cat.name}}</option>
+                                            <option *ngFor="let cat of categoryData" [value]="cat.categoryid" ngDefaultControl>{{cat.category}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,13 +86,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let pro of productData">
-            <td>{{pro.name}}</td>
+            <td>{{pro.product}}</td>
             <td>{{pro.color}}</td>
             <td>{{pro.stock}}</td>
             <td>{{pro.price}}</td>
-            <td>{{pro.sizeid}}</td>
-            <td>{{pro.brandid}}</td>
-            <td>{{pro.categoryid}}</td>
+            <td>{{pro.size}}</td>
+            <td>{{pro.brand}}</td>
+            <td>{{pro.category}}</td>
           </tr>
         </tbody>
       </table>

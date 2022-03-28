@@ -21,7 +21,10 @@ import { CategoriesComponent } from './components/BSC/Category/categories/catego
 import { ProductComponent } from './components/Products/product/product.component';
 import { AuthModule }  from  '@auth0/auth0-angular';
 import { UserComponent } from './components/Table/users/user/user.component';
-import { OrderComponent } from './components/Orders/order/order.component' ;
+import { OrderComponent } from './components/Orders/order/order.component';
+import { OrdersComponent } from './Table/orders/orders.component';
+import { ClientComponent } from './components/client/client.component';
+import { ClientOrderComponent } from './components/client-order/client-order.component' ;
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { OrderComponent } from './components/Orders/order/order.component' ;
     MenuComponent,
     ProductComponent,
     UserComponent,
-    OrderComponent
+    OrderComponent,
+    OrdersComponent,
+    ClientComponent,
+    ClientOrderComponent
   ],
   imports: [
     BrowserModule,

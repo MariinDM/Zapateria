@@ -11,6 +11,6 @@ import { CommonModule } from '@angular/common';
 })
 export class BrandModule { 
 
-  name!:string;
+  brand!:string;
 
 }

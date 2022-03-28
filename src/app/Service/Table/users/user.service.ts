@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserResponse } from 'src/app/Models/user/user.module';
+import { UserResponse, UserModule } from 'src/app/Models/user/user.module';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class UserService {
   //  });
   //   return this.http.post(`${this.serverURL}suppliers`, supplier,{headers:reqHeader});
   // }
-  update(id:number, user: UserResponse): Observable<any> {
+  update(id:number, user: UserModule): Observable<any> {
     const token:any = localStorage.getItem('token')
     const reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',

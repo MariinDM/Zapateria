@@ -12,6 +12,6 @@ import { CommonModule } from '@angular/common';
 export class ShipperModule { 
   constructor(){}
 
-  name!:string;
+  shipper!:string;
   phone!:string;
 }

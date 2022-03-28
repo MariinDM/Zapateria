@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryModule { 
 
-  name!:string;
+  category!:string;
 }

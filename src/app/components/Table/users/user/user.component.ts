@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
-import { UserResponse } from 'src/app/Models/user/user.module';
+import { checkAccessID } from 'src/app/functions/token';
+import { UserResponse, UserModule } from 'src/app/Models/user/user.module';
 import { UserService } from 'src/app/Service/Table/users/user.service';
 
 @Component({
@@ -13,9 +14,11 @@ import { UserService } from 'src/app/Service/Table/users/user.service';
 export class UserComponent implements OnInit {
 
   userForm!:FormGroup;
-  user!:UserResponse;
+  user!:UserModule;
+  user2!:UserModule;
   userData!:any[];
   id!:number;
+  access!:any;
 
   constructor(public userService:UserService, public router:Router, private fb:FormBuilder) { }
 
@@ -23,6 +26,7 @@ export class UserComponent implements OnInit {
     this.createForm()
     this.getall()
     this.setUser2()
+    this.access = checkAccessID()
   }
 
   update(id:number):void{
@@ -33,8 +37,7 @@ export class UserComponent implements OnInit {
     }else{
       this.setUser();
       this.userService.update(id,this.user).subscribe((data:any)=>{
-        timeMessage('Registrado',1500)
-        this.router.navigate(['/users']);
+        timeMessage('Actualizado',1500)
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -44,7 +47,6 @@ export class UserComponent implements OnInit {
   getall():void{
     this.userService.getall().subscribe((data:any)=>{
       this.userData=data.users
-      console.log(data)
       console.log(this.userData)
     }
     ,error=>{
@@ -64,16 +66,23 @@ export class UserComponent implements OnInit {
   }
   setUser():void{
     this.user = {
+      email: this.userForm.get('email')?.value,
+      password: this.userForm.get('password')?.value,
       accessid: this.userForm.get('accessid')?.value,
     }
   }
   setUser2():void{
-    this.user = {
-      accessid: 0
+    this.user2 = {
+      email: '', 
+      password: '',
+      accessid: 3,
     }
   }
   createForm():void{
     this.userForm = this.fb.group({
+    
+      email: ['',[Validators.required]],
+      password: ['',[Validators.required]],
       accessid:['',[Validators.required]],
     });
   }

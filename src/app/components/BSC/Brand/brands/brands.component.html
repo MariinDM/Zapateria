@@ -14,7 +14,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fa fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" formControlName="name" />
+                        <input type="text" id="form3Example1c" class="form-control" formControlName="brand" />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -37,7 +37,7 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let bra of brandsData">
-                            <td>{{bra.name}}</td>
+                            <td>{{bra.brand}}</td>
                             <td>
                               <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm px-3" (click)="getone(bra.brandid)">
                                 <i class="fa fa-pencil"></i>
@@ -54,7 +54,7 @@
                                           <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fa fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                              <input type="text" id="form3Example1c" class="form-control" formControlName="name" [value]="brand2.name">
+                                              <input type="text" id="form3Example1c" class="form-control" formControlName="brand" [value]="Brand2.brand">
                                               <label class="form-label" for="form3Example1c">Your Name</label>
                                             </div>
                                           </div>

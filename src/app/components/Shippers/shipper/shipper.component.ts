@@ -5,6 +5,7 @@ import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { checkLocalStorage } from 'src/app/functions/token';
 import { ShipperModule } from 'src/app/Models/shipper/shipper.module';
 import { ShipperService } from 'src/app/Service/Shippers/shipper.service';
+import { timer, interval} from 'rxjs';
 
 @Component({
   selector: 'app-shipper',
@@ -19,8 +20,11 @@ export class ShipperComponent implements OnInit {
   constructor(public shipperService:ShipperService, public router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.createForm()
     this.getall()
+    interval(3000).subscribe(()=>{
+      this.getall()
+    })
+    this.createForm()
     this.setShipper2()
   }
   insert():void{
@@ -32,7 +36,6 @@ export class ShipperComponent implements OnInit {
       this.setShipper();
       this.shipperService.insert(this.shipper).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un problema')
       });
@@ -47,7 +50,7 @@ export class ShipperComponent implements OnInit {
       this.setShipper();
       this.shipperService.update(id,this.shipper).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/shippers']);
+        this.router.navigate(['/dato']);
         this.getall()
         this.createForm()
       },error=>{
@@ -65,7 +68,7 @@ export class ShipperComponent implements OnInit {
   }
   getall():void{
     this.shipperService.getall().subscribe((data:any)=>{
-      this.shipperData=data.shippers
+      this.shipperData=data.dato
       console.log(this.shipperData)
     }
     ,error=>{
@@ -74,7 +77,7 @@ export class ShipperComponent implements OnInit {
   }
   getone(id:number):void{
     this.shipperService.getone(id).subscribe((data:any)=>{
-      this.shipper2=data.shippers
+      this.shipper2=data.dato
       console.log(this.shipper2)
     }
     ,error=>{
@@ -84,13 +87,13 @@ export class ShipperComponent implements OnInit {
 
   setShipper():void{
     this.shipper = {
-      name: this.shipperForm.get('name')?.value,
+      shipper: this.shipperForm.get('shipper')?.value,
       phone: this.shipperForm.get('phone')?.value,
     }
   }
   setShipper2():void{
     this.shipper2 = {
-      name: '',
+      shipper: '',
       phone: ''
     }
   }
@@ -104,7 +107,7 @@ export class ShipperComponent implements OnInit {
 
   createForm():void{
     this.shipperForm = this.fb.group({
-      name:['',[Validators.required]],
+      shipper:['',[Validators.required]],
       phone:['',[Validators.required]],
     });
   }

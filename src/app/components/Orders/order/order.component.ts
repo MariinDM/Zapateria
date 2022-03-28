@@ -48,11 +48,10 @@ export class OrderComponent implements OnInit {
       this.orderService.insert(this.order).subscribe((data:any)=>{
         //this.getall()
         this.createForm()
-        this.id=data.orders.orderid
+        this.id=data.dato.orderid
         this.setOrderDetails()
         this.orderDetailsService.insert(this.orderDetails).subscribe((data:any)=>{
           timeMessage('Insertado',1500)
-          this.router.navigate(['/orders']);
           this.createForm2()
         })
       },error=>{
@@ -95,7 +94,7 @@ export class OrderComponent implements OnInit {
   // }
   getallSupplier():void{
     this.supplierService.getall().subscribe((data:any)=>{
-      this.supplierData=data.suppliers
+      this.supplierData=data.dato
       console.log(this.supplierData)
     }
     ,error=>{
@@ -104,7 +103,7 @@ export class OrderComponent implements OnInit {
   }
   getallShipper():void{
     this.shipperService.getall().subscribe((data:any)=>{
-      this.shipperData=data.shippers
+      this.shipperData=data.dato
       console.log(this.shipperData)
     }
     ,error=>{
@@ -113,7 +112,7 @@ export class OrderComponent implements OnInit {
   }
   getallProduct():void{
     this.productService.getall().subscribe((data:any)=>{
-      this.productsData=data.products
+      this.productsData=data.dato
       console.log(this.productsData)
     }
     ,error=>{
@@ -144,12 +143,6 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  addArray(id:number):void{
-    this.productService.getone(id).subscribe((data:any)=>{
-      this.productsTable.push(data.products)
-      console.log(this.productsTable)
-    })
-  }
   setOrderDetails():void{
     this.orderDetails = {
       productid: this.orderdetailsForm.get('productid')?.value,

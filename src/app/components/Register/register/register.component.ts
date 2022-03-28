@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
     this.user = {
       email: this.registerFrom.get('email')?.value,
       password: this.registerFrom.get('password')?.value,
+      accessid: 3,
     }
   }
   get getEmail(){

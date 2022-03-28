@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { BrandModule } from 'src/app/Models/brand/brand/brand.module';
 import { BrandService } from 'src/app/Service/Brand/brand.service';
+import { timer, interval} from 'rxjs';
 
 @Component({
   selector: 'app-brands',
@@ -13,16 +14,19 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 export class BrandsComponent implements OnInit {
 
   brandsForm!:FormGroup;
-  brand!:BrandModule;
-  brand2!:BrandModule;
+  Brand!:BrandModule;
+  Brand2!:BrandModule;
   id!:number;
   brandsData!:any[];
 
   constructor(public brandService:BrandService, public router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.createForm()
     this.getall()
+    interval(3000).subscribe(()=>{
+      this.getall()
+    })
+    this.createForm()
     this.setBrand2()
   }
   insert():void{
@@ -32,10 +36,8 @@ export class BrandsComponent implements OnInit {
       });
     }else{
       this.setBrand();
-      this.brandService.insert(this.brand).subscribe((data:any)=>{
+      this.brandService.insert(this.Brand).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/brands']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -48,10 +50,8 @@ export class BrandsComponent implements OnInit {
       });
     }else{
       this.setBrand();
-      this.brandService.update(id,this.brand).subscribe((data:any)=>{
+      this.brandService.update(id,this.Brand).subscribe((data:any)=>{
         timeMessage('Actualizado',1500)
-        this.router.navigate(['/brands']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -60,14 +60,13 @@ export class BrandsComponent implements OnInit {
   delete(id:number):void{
     this.brandService.delete(id).subscribe((data:any)=>{
       timeMessage('Borrado',1500)
-      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });
   }
   getall():void{
     this.brandService.getall().subscribe((data:any)=>{
-      this.brandsData=data.brands
+      this.brandsData=data.dato
       console.log(this.brandsData)
     }
     ,error=>{
@@ -75,9 +74,9 @@ export class BrandsComponent implements OnInit {
   }
   getone(id:number):void{
     this.brandService.getone(id).subscribe((data:any)=>{
-      this.brand2=data.brands
-      console.log(this.brand2)
-      this.id=data.brands.brandid
+      this.Brand2=data.dato
+      console.log(this.Brand2)
+      this.id=data.dato.brandid
       console.log('id: '+this.id)
     }
     ,error=>{
@@ -85,18 +84,18 @@ export class BrandsComponent implements OnInit {
     });
   }
   setBrand():void{
-    this.brand = {
-      name: this.brandsForm.get('name')?.value,
+    this.Brand = {
+      brand: this.brandsForm.get('brand')?.value,
     }
   }
   setBrand2():void{
-    this.brand2 = {
-      name: ''
+    this.Brand2 = {
+      brand: ''
     }
   }
   createForm():void{
     this.brandsForm = this.fb.group({
-      name:['',[Validators.required]]
+      brand:['',[Validators.required]]
     });
   }
 

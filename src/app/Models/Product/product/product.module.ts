@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class ProductModule {
-  name!:string;
+  product!:string;
   color!:string;
   stock!:number;
   price!:number;

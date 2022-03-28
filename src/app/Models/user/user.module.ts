@@ -15,6 +15,7 @@ export class UserModule {
 
   email:string='';
   password:string='';
+  accessid:number=0;
 
 }
 

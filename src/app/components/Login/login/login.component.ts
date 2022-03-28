@@ -33,12 +33,12 @@ export class LoginComponent implements OnInit {
       this.UserService.login(this.user).subscribe((data:any)=>{
         if(data){
           window.location.reload()
-          this.router.navigate(['/'])
         }
       },error=>{
         errorMessage('Email o Contraseña Incorrecta')
       });
     }
+    this.router.navigate(['/home'])
   }
 
   createFrom():void{
@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
     this.user = {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
+      accessid: 3,
     }
   }
 

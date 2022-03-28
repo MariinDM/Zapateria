@@ -15,12 +15,12 @@
                         <label class="form-label" for="form3Example1q">Supplier:    </label>
                         <select class="form-select" formControlName="supplierid">
                             <option disabled selected>SUPPLIERS</option>
-                            <option *ngFor="let sup of supplierData" [value]="sup.supplierid" ngDefaultControl>{{sup.name}}</option>
+                            <option *ngFor="let sup of supplierData" [value]="sup.supplierid" ngDefaultControl>{{sup.supplier}}</option>
                         </select>
                         <label class="form-label" for="form3Example1q">Shipper:    </label>
                           <select class="form-select" formControlName="shipperid">
                               <option disabled selected>SHIPPERS</option>
-                              <option *ngFor="let ship of shipperData" [value]="ship.shipperid" ngDefaultControl>{{ship.name}}</option>
+                              <option *ngFor="let ship of shipperData" [value]="ship.shipperid" ngDefaultControl>{{ship.shipper}}</option>
                           </select>
                     </div>
                     <br>
@@ -34,7 +34,7 @@
                         <label class="form-label" for="form3Example1q">Products:    </label>
                           <select class="select form-select" formControlName="productid">
                               <option disabled selected>PRODUCTS</option>
-                              <option *ngFor="let pro of productsData" [value]="pro.productid" ngDefaultControl>{{pro.name}}</option>
+                              <option *ngFor="let pro of productsData" [value]="pro.productid" ngDefaultControl>{{pro.product}}</option>
                           </select>
                           <br>
                           <label class="form-label" for="form3Example1q">Quantity:    </label>
@@ -43,71 +43,11 @@
                           <label class="form-label" for="form3Example1q">Price:    </label>
                           <input type="text" class="form-control" placeholder="UNIT PRICE" formControlName="unitprice">
                           <br>
-                          <!-- <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                            <button type="submit" class="btn btn-primary btn-lg" (click)="addArray(id)">Add</button>
-                          </div> -->
+                          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <a type="submit" class="btn btn-primary btn-lg" routerLink="/table">Show Orders</a>
+                          </div>
                       </div>
                   </form>
-                <!-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <table class="table align-middle">
-                        <thead>
-                          <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Price</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let ship of shipperData">
-                            <td>{{ship.name}}</td>
-                            <td>{{ship.phone}}</td>
-                            <td>
-                              <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm px-3" (click)="getone(ship.shipperid)">
-                                <i class="fa fa-pencil"></i>
-                              </button>
-                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Update Supplier</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form class="mx-1 mx-md-4" [formGroup]="shipperForm" (ngSubmit)="update(ship.shipperid)">
-                                      <div class="modal-body">
-                                          <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fa fa-user fa-lg me-3 fa-fw"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                              <input type="text" id="form3Example1c" class="form-control" formControlName="name" [value]="shipper2.name">
-                                              <label class="form-label" for="form3Example1c">Your Name</label>
-                                            </div>
-                                          </div>
-                                          <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fa fa-phone fa-lg me-3 fa-fw"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                              <input type="email" id="form3Example3c" class="form-control" formControlName="phone" [value]="shipper2.phone"/>
-                                              <label class="form-label" for="form3Example3c">Your Phone</label>
-                                            </div>
-                                          </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                          <td>
-                            <td>
-                              <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete(ship.shipperid)">
-                                <i class="fa fa-times"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div> -->
               </div>
             </div>
           </div>

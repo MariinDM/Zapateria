@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timeMessage } from 'src/app/functions/alerts';
-import { checkLocalStorage } from 'src/app/functions/token';
+import { checkAccessID, checkLocalStorage } from 'src/app/functions/token';
 import { UserService } from 'src/app/Service/user.service';
 
 @Component({
@@ -12,10 +12,11 @@ import { UserService } from 'src/app/Service/user.service';
 export class NavComponent implements OnInit {
 
   stats!:any;
+  id!:any;
 
   constructor(public userService:UserService,public router:Router) { 
-    let status = checkLocalStorage()
-    this.stats = status;
+    this.stats = checkLocalStorage()
+    this.id = checkAccessID()
   }
 
   ngOnInit(): void {

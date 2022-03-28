@@ -5,6 +5,7 @@ import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { checkLocalStorage } from 'src/app/functions/token';
 import { SupplierModule } from 'src/app/Models/supplier/supplier.module';
 import { SupplierService } from 'src/app/Service/Suppliers/supplier.service';
+import { timer, interval} from 'rxjs';
 
 @Component({
   selector: 'app-supplier',
@@ -20,8 +21,11 @@ export class SupplierComponent implements OnInit {
   constructor(public supplierService:SupplierService, public router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.createForm()
     this.getall()
+    this.createForm()
+    interval(3000).subscribe(()=>{
+      this.getall()
+    })
     this.setSupplier2()
   }
   insert():void{
@@ -33,7 +37,6 @@ export class SupplierComponent implements OnInit {
       this.setSupplier();
       this.supplierService.insert(this.supplier).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/suppliers']);
         this.getall()
         this.createForm()
       },error=>{
@@ -50,7 +53,6 @@ export class SupplierComponent implements OnInit {
       this.setSupplier();
       this.supplierService.update(id,this.supplier).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/suppliers']);
         this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
@@ -67,7 +69,7 @@ export class SupplierComponent implements OnInit {
   }
   getall():void{
     this.supplierService.getall().subscribe((data:any)=>{
-      this.supplierData=data.suppliers
+      this.supplierData=data.dato
       console.log(this.supplierData)
     }
     ,error=>{
@@ -75,9 +77,9 @@ export class SupplierComponent implements OnInit {
   }
   getone(id:number):void{
     this.supplierService.getone(id).subscribe((data:any)=>{
-      this.supplier2=data.suppliers
+      this.supplier2=data.dato
       console.log(this.supplier2)
-      this.id=data.suppliers.supplierid
+      this.id=data.dato.supplierid
       console.log('id: '+this.id)
     }
     ,error=>{
@@ -86,14 +88,14 @@ export class SupplierComponent implements OnInit {
   }
   setSupplier():void{
     this.supplier = {
-      name: this.supplierForm.get('name')?.value,
+      supplier: this.supplierForm.get('supplier')?.value,
       email: this.supplierForm.get('email')?.value,
       phone: this.supplierForm.get('phone')?.value,
     }
   }
   setSupplier2():void{
     this.supplier2 = {
-      name: '',
+      supplier: '',
       email: '',
       phone: '',
     }
@@ -101,7 +103,7 @@ export class SupplierComponent implements OnInit {
 
   createForm():void{
     this.supplierForm = this.fb.group({
-      name:['',[Validators.required]],
+      supplier:['',[Validators.required]],
       email:['',[Validators.required]],
       phone:['',[Validators.required]],
     });

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { CategoryModule } from 'src/app/Models/category/category/category.module';
 import { CategoryService } from 'src/app/Service/category/category.service';
+import { timer, interval} from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -23,6 +24,9 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
+    interval(3000).subscribe(()=>{
+      this.getall()
+    })
     this.setCategory2()
   }
 
@@ -35,8 +39,6 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.insert(this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/categories']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -51,8 +53,6 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.update(id,this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
-        this.router.navigate(['/categories']);
-        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -61,14 +61,13 @@ export class CategoriesComponent implements OnInit {
   delete(id:number):void{
     this.categoryService.delete(id).subscribe((data:any)=>{
       timeMessage('Registrado',1500)
-      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });
   }
   getall():void{
     this.categoryService.getall().subscribe((data:any)=>{
-      this.categoryData=data.categories
+      this.categoryData=data.dato
       console.log(this.categoryData)
     }
     ,error=>{
@@ -77,9 +76,9 @@ export class CategoriesComponent implements OnInit {
   }
   getone(id:number):void{
     this.categoryService.getone(id).subscribe((data:any)=>{
-      this.category2=data.categories
+      this.category2=data.dato
       console.log(this.category2)
-      this.id=data.categories.categoryid
+      this.id=data.dato.categoryid
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -87,17 +86,17 @@ export class CategoriesComponent implements OnInit {
   }
   setCategory():void{
     this.category = {
-      name: this.categoryForm.get('name')?.value,
+      category: this.categoryForm.get('category')?.value,
     }
   }
   setCategory2():void{
     this.category2 = {
-      name: '',
+      category: '',
     }
   }
   createForm():void{
     this.categoryForm = this.fb.group({
-      name:['',[Validators.required]]
+      category:['',[Validators.required]]
     });
   }
 
