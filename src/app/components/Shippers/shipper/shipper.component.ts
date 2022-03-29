@@ -21,9 +21,9 @@ export class ShipperComponent implements OnInit {
 
   ngOnInit(): void {
     this.getall()
-    interval(3000).subscribe(()=>{
-      this.getall()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getall()
+    // })
     this.createForm()
     this.setShipper2()
   }
@@ -36,6 +36,7 @@ export class ShipperComponent implements OnInit {
       this.setShipper();
       this.shipperService.insert(this.shipper).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un problema')
       });
@@ -49,8 +50,7 @@ export class ShipperComponent implements OnInit {
     }else{
       this.setShipper();
       this.shipperService.update(id,this.shipper).subscribe((data:any)=>{
-        timeMessage('Registrado',1500)
-        this.router.navigate(['/dato']);
+        timeMessage('Actualizado',1500)
         this.getall()
         this.createForm()
       },error=>{

@@ -24,9 +24,9 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
-    interval(3000).subscribe(()=>{
-      this.getall()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getall()
+    // })
     this.setCategory2()
   }
 
@@ -39,6 +39,7 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.insert(this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -53,6 +54,7 @@ export class CategoriesComponent implements OnInit {
       this.setCategory();
       this.categoryService.update(id,this.category).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -60,7 +62,8 @@ export class CategoriesComponent implements OnInit {
   }
   delete(id:number):void{
     this.categoryService.delete(id).subscribe((data:any)=>{
-      timeMessage('Registrado',1500)
+      timeMessage('Borrado',1500)
+      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });

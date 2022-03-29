@@ -1,17 +1,24 @@
-<div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-    <table class="table align-middle">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Color</th>
-            <th scope="col">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ship of shipperData">
-            <td>{{ship.name}}</td>
-            <td>{{ship.phone}}</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
+<br>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Order</th>
+        <th>Supplier</th>
+        <th>Shipper</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>UnitPrice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pro of orders">
+        <td>{{pro.orderid}}</td>
+        <td>{{pro.supplier}}</td>
+        <td>{{pro.shipper}}</td>
+        <td>{{pro.orderdetails.product}}</td>
+        <td>{{pro.orderdetails.quantity}}</td>
+        <td>{{pro.orderdetails.unitprice}}</td>
+      </tr>
+    </tbody>
+</table>
+<br>

@@ -23,9 +23,9 @@ export class SupplierComponent implements OnInit {
   ngOnInit(): void {
     this.getall()
     this.createForm()
-    interval(3000).subscribe(()=>{
-      this.getall()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getall()
+    // })
     this.setSupplier2()
   }
   insert():void{

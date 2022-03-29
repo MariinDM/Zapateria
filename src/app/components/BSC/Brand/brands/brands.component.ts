@@ -23,9 +23,9 @@ export class BrandsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getall()
-    interval(3000).subscribe(()=>{
-      this.getall()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getall()
+    // })
     this.createForm()
     this.setBrand2()
   }
@@ -38,6 +38,7 @@ export class BrandsComponent implements OnInit {
       this.setBrand();
       this.brandService.insert(this.Brand).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -52,6 +53,7 @@ export class BrandsComponent implements OnInit {
       this.setBrand();
       this.brandService.update(id,this.Brand).subscribe((data:any)=>{
         timeMessage('Actualizado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -60,6 +62,7 @@ export class BrandsComponent implements OnInit {
   delete(id:number):void{
     this.brandService.delete(id).subscribe((data:any)=>{
       timeMessage('Borrado',1500)
+      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });

@@ -24,14 +24,16 @@ export class OrdersComponent implements OnInit {
   supplierData!:any[];
   productsData!:any[];
   productsTable!:any[];
+  orders!:any[];
 
   constructor(public orderService:OrderService, public router:Router, private fb:FormBuilder, public supplierService:SupplierService, public shipperService:ShipperService, public productService:ProductService,public orderDetailsService:OrderdetailService) { }
 
   ngOnInit(): void {
     interval(3000).subscribe(()=>{
-      this.getallSupplier()
-      this.getallShipper()
-      this.getallProduct()
+      // this.getallSupplier()
+      // this.getallShipper()
+      // this.getallProduct()
+      this.getallFK()
     })
     //this.setOrder2()
   }
@@ -58,6 +60,15 @@ export class OrdersComponent implements OnInit {
     this.productService.getall().subscribe((data:any)=>{
       this.productsData=data.dato
       console.log(this.productsData)
+    }
+    ,error=>{
+      
+    });
+  }
+  getallFK():void{
+    this.orderDetailsService.getallFK().subscribe((data:any)=>{
+      this.orders=data.dato
+      console.log(this.orders)
     }
     ,error=>{
       

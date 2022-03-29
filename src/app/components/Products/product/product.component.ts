@@ -36,12 +36,12 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTableProduct()
-    interval(3000).subscribe(()=>{
-      this.getallcategory()
-      this.getallbrand()
-      this.getallsize()
-      this.getTableProduct()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getallcategory()
+    //   this.getallbrand()
+    //   this.getallsize()
+    //   this.getTableProduct()
+    // })
     this.createForm()
   }
   insert():void{

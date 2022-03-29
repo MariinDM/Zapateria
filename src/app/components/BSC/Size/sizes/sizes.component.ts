@@ -24,9 +24,9 @@ export class SizesComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     this.getall()
-    interval(3000).subscribe(()=>{
-      this.getall()
-    })
+    // interval(3000).subscribe(()=>{
+    //   this.getall()
+    // })
     this.setSize2()
   }
   insert():void{
@@ -38,6 +38,7 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.insert(this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -52,6 +53,7 @@ export class SizesComponent implements OnInit {
       this.setSize();
       this.sizeService.update(id,this.size).subscribe((data:any)=>{
         timeMessage('Registrado',1500)
+        this.getall()
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -60,6 +62,7 @@ export class SizesComponent implements OnInit {
   delete(id:number):void{
     this.sizeService.delete(id).subscribe((data:any)=>{
       timeMessage('Registrado',1500)
+      this.getall()
     },error=>{
       errorMessage('Ocurrio un Error')
     });

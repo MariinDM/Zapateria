@@ -1,33 +1,32 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderdetailModule } from 'src/app/Models/OrdersDetails/orderdetail/orderdetail.module';
+import { Carrito } from 'src/app/Models/carrito';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderdetailService {
+export class CarritoService {
 
   serverURL=environment.apiURL
+  constructor(private http:HttpClient) { }
 
-  constructor(private http:HttpClient) {}
-
-  insert(orderdetail: OrderdetailModule): Observable<any> {
+  insert(carrito: Carrito): Observable<any> {
     const token:any = localStorage.getItem('token')
     const reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.post(`${this.serverURL}orderdetails`, orderdetail,{headers:reqHeader});
+    return this.http.post(`${this.serverURL}carrito`, carrito,{headers:reqHeader});
   }
-  update(id:number,orderdetail: OrderdetailModule): Observable<any> {
+  update(id:number, carrito: Carrito): Observable<any> {
     const token:any = localStorage.getItem('token')
     const reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.put(`${this.serverURL}ordersdetails/${id}`, orderdetail,{headers:reqHeader});
+    return this.http.put(`${this.serverURL}carrito/${id}`, carrito,{headers:reqHeader});
   }
   delete(id:number): Observable<any> {
     const token:any = localStorage.getItem('token')
@@ -35,7 +34,7 @@ export class OrderdetailService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.delete(`${this.serverURL}ordersdetails/${id}`,{headers:reqHeader});
+    return this.http.delete(`${this.serverURL}carrito/${id}`,{headers:reqHeader});
   }
   getall(): Observable<any> {
     const token:any = localStorage.getItem('token')
@@ -43,7 +42,7 @@ export class OrderdetailService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.get(`${this.serverURL}ordersdetails`,{headers:reqHeader});
+    return this.http.get(`${this.serverURL}carrito`,{headers:reqHeader});
   }
   getone(id:number): Observable<any> {
     const token:any = localStorage.getItem('token')
@@ -51,14 +50,6 @@ export class OrderdetailService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.get(`${this.serverURL}orderdetails/${id}`,{headers:reqHeader});
-  }
-  getallFK(): Observable<any> {
-    const token:any = localStorage.getItem('token')
-    const reqHeader = new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-   });
-    return this.http.get(`${this.serverURL}tableorders`,{headers:reqHeader});
+    return this.http.get(`${this.serverURL}carrito/${id}`,{headers:reqHeader});
   }
 }
