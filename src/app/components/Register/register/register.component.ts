@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
       email: this.registerFrom.get('email')?.value,
       password: this.registerFrom.get('password')?.value,
       accessid: 3,
+      isActivated:1
     }
   }
   get getEmail(){

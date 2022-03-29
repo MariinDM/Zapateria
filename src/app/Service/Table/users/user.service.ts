@@ -28,14 +28,14 @@ export class UserService {
    });
     return this.http.put(`${this.serverURL}users/${id}`, user,{headers:reqHeader});
   }
-  // delete(id:number): Observable<any> {
-  //   const token:any = localStorage.getItem('token')
-  //   const reqHeader = new HttpHeaders({ 
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${token}`
-  //  });
-  //   return this.http.delete(`${this.serverURL}suppliers/${id}`,{headers:reqHeader});
-  // }
+  delete(id:number,user:UserModule): Observable<any> {
+    const token:any = localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+   });
+    return this.http.put(`${this.serverURL}users/${id}`, user,{headers:reqHeader});
+  }
   getall(): Observable<any> {
     const token:any = localStorage.getItem('token')
     const reqHeader = new HttpHeaders({ 

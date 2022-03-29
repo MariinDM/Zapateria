@@ -46,6 +46,22 @@ export class UserComponent implements OnInit {
       });
     }
   }
+  delete(id:number):void{
+    if(this.userForm.invalid){
+      return Object.values(this.userForm.controls).forEach(control=>{
+        control.markAsTouched();
+      });
+    }else{
+      this.setUser();
+      this.userService.update(id,this.user).subscribe((data:any)=>{
+        timeMessage('Usuario Desactivado',1500)
+        this.getall()
+        this.ver=false
+      },error=>{
+        errorMessage('Ocurrio un Error')
+      });
+    }
+  }
   getall():void{
     this.userService.getall().subscribe((data:any)=>{
       this.userData=data.users
@@ -70,8 +86,9 @@ export class UserComponent implements OnInit {
   setUser():void{
     this.user = {
       email: this.userForm.get('email')?.value,
-      password: this.user2.password,
+      password: this.userForm.get('password')?.value,
       accessid: this.userForm.get('accessid')?.value,
+      isActivated: this.userForm.get('isActivated')?.value
     }
   }
   setUser2():void{
@@ -79,14 +96,15 @@ export class UserComponent implements OnInit {
       email: '', 
       password: '',
       accessid: 0,
+      isActivated:0
     }
   }
   createForm():void{
     this.userForm = this.fb.group({
-    
       email: ['',[Validators.required]],
       password: ['',[Validators.required]],
-      accessid:['',[Validators.required]],
+      accessid:[0,[Validators.required]],
+      isActivated:[0,[Validators.required]],
     });
   }
 

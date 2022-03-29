@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
       accessid: 3,
+      isActivated:1
     }
   }
 
