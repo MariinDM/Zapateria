@@ -5,6 +5,7 @@ import { errorMessage, timeMessage } from 'src/app/functions/alerts';
 import { Carrito } from 'src/app/Models/carrito';
 import { CarritoService } from 'src/app/Service/Carrito/carrito.service';
 import { ProductService } from 'src/app/Service/Product/product.service';
+import { timer, interval } from 'rxjs';
 
 @Component({
   selector: 'app-client-order',
@@ -22,7 +23,10 @@ export class ClientOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
-    this.getallProduct()
+    interval(3000).subscribe(()=>{
+      this.getallProduct()
+      
+    })
   }
   insert():void{
     if(this.carritoForm.invalid){
@@ -35,25 +39,25 @@ export class ClientOrderComponent implements OnInit {
         timeMessage('Registrado',1500)
         // this.getall()
       },error=>{
-        errorMessage('Ocurrio un Error')
+        errorMessage(error.error.error.message)
       });
     }
   }
-  update(id:number):void{
-    if(this.carritoForm.invalid){
-      return Object.values(this.carritoForm.controls).forEach(control=>{
-        control.markAsTouched();
-      });
-    }else{
-      this.setCarrito();
-      this.carritoService.update(id,this.carrito).subscribe((data:any)=>{
-        timeMessage('Actualizado',1500)
-        // this.getall()
-      },error=>{
-        errorMessage('Ocurrio un Error')
-      });
-    }
-  }
+  // update(id:number):void{
+  //   if(this.carritoForm.invalid){
+  //     return Object.values(this.carritoForm.controls).forEach(control=>{
+  //       control.markAsTouched();
+  //     });
+  //   }else{
+  //     this.setCarrito();
+  //     this.carritoService.update(id,this.carrito).subscribe((data:any)=>{
+  //       timeMessage('Actualizado',1500)
+  //       // this.getall()
+  //     },error=>{
+  //       errorMessage('Ocurrio un Error')
+  //     });
+  //   }
+  // }
   delete(id:number):void{
     this.carritoService.delete(id).subscribe((data:any)=>{
       timeMessage('Borrado',1500)

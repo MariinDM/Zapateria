@@ -35,13 +35,12 @@ export class ProductComponent implements OnInit {
   constructor(public productService:ProductService, public brandService:BrandService, public sizeService:SizeService, public categoryService:CategoryService, public router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.getTableProduct()
-    // interval(3000).subscribe(()=>{
-    //   this.getallcategory()
-    //   this.getallbrand()
-    //   this.getallsize()
-    //   this.getTableProduct()
-    // })
+    interval(5000).subscribe(()=>{
+      this.getallcategory()
+      this.getallbrand()
+      this.getallsize()
+      this.getTableProduct()
+    })
     this.createForm()
   }
   insert():void{

@@ -20,13 +20,13 @@ export class CarritoService {
    });
     return this.http.post(`${this.serverURL}carrito`, carrito,{headers:reqHeader});
   }
-  update(id:number, carrito: Carrito): Observable<any> {
+  update(): Observable<any> {
     const token:any = localStorage.getItem('token')
     const reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
    });
-    return this.http.put(`${this.serverURL}carrito/${id}`, carrito,{headers:reqHeader});
+    return this.http.put(`${this.serverURL}carrito/1`,{headers:reqHeader});
   }
   delete(id:number): Observable<any> {
     const token:any = localStorage.getItem('token')

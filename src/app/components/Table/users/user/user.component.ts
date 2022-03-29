@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   user2!:UserModule;
   userData!:any[];
   id!:number;
+  ver:boolean=false;
   access!:any;
 
   constructor(public userService:UserService, public router:Router, private fb:FormBuilder) { }
@@ -39,6 +40,7 @@ export class UserComponent implements OnInit {
       this.userService.update(id,this.user).subscribe((data:any)=>{
         timeMessage('Actualizado',1500)
         this.getall()
+        this.ver=false
       },error=>{
         errorMessage('Ocurrio un Error')
       });
@@ -55,10 +57,11 @@ export class UserComponent implements OnInit {
   }
   getone(id:number):void{
     this.userService.getone(id).subscribe((data:any)=>{
-      this.user=data.users
-      console.log(this.user)
-      this.id=data.users.id
+      this.user2=data[0]
+      console.log(this.user2)
+      this.id=data[0].id
       console.log('id: '+this.id)
+      this.ver=true
     }
     ,error=>{
       errorMessage('Ocurrio un problema')
@@ -67,7 +70,7 @@ export class UserComponent implements OnInit {
   setUser():void{
     this.user = {
       email: this.userForm.get('email')?.value,
-      password: this.userForm.get('password')?.value,
+      password: this.user2.password,
       accessid: this.userForm.get('accessid')?.value,
     }
   }
@@ -75,7 +78,7 @@ export class UserComponent implements OnInit {
     this.user2 = {
       email: '', 
       password: '',
-      accessid: 3,
+      accessid: 0,
     }
   }
   createForm():void{

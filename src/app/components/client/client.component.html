@@ -1,20 +1,28 @@
 <br>
+<h1>CARRITO PEDIDOS</h1
+  >
+<br>
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
       <tr>
         <th>Name</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Position</th>
-        <th>Actions</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pro of productData">
-        <th>{{pro.product}}</th>
-        <th>{{pro.product}}</th>
-        <th>{{pro.product}}</th>
+      <tr *ngFor="let pro of buyprodructs">
+        <td>{{pro.product}}</td>
+        <td>{{pro.quantity}}</td>
+        <td>{{pro.unitprice}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete(pro._id)">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
-</table>
+</table><br>
+<button class="btn btn-primary btn-lg px-5" type="button" (click)="update()">Comprar</button>
 <br>
